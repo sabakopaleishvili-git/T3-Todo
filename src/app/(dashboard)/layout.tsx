@@ -23,7 +23,7 @@ export default async function DashboardLayout({
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <img
-              src={session?.user.image ?? "/placeholder.svg"}
+              src={session?.user.image ?? "/people.png"}
               alt="User avatar"
               width={30}
               height={30}

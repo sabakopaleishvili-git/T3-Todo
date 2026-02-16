@@ -1,5 +1,5 @@
-import { TaskBoard } from "_components/Tasks";
 import { api, HydrateClient } from "~/trpc/server";
+import TasksDashboard from "_components/TasksDashboard";
 
 export default async function TasksPage() {
   void api.task.list.prefetch();
@@ -8,7 +8,7 @@ export default async function TasksPage() {
   return (
     <HydrateClient>
       <main>
-        <TaskBoard />
+        <TasksDashboard />
       </main>
     </HydrateClient>
   );

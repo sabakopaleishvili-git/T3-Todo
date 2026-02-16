@@ -22,10 +22,10 @@ export const taskRouter = createTRPCRouter({
       orderBy: [{ status: "asc" }, { createdAt: "desc" }],
       include: {
         createdBy: {
-          select: { id: true, name: true, email: true },
+          select: { id: true, name: true, email: true, image: true },
         },
         assignedTo: {
-          select: { id: true, name: true, email: true },
+          select: { id: true, name: true, email: true, image: true },
         },
       },
     });
@@ -33,7 +33,7 @@ export const taskRouter = createTRPCRouter({
 
   getAssignableUsers: protectedProcedure.query(async ({ ctx }) => {
     return ctx.db.user.findMany({
-      select: { id: true, name: true, email: true },
+      select: { id: true, name: true, email: true, image: true },
       orderBy: [{ name: "asc" }, { email: "asc" }],
     });
   }),

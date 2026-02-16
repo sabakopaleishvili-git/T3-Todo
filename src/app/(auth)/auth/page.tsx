@@ -8,12 +8,20 @@ export default function AuthPage() {
         <p className="mt-2 text-white/80">
           Sign in to create tasks, assign them, and track progress.
         </p>
-        <Link
-          href="/api/auth/signin"
-          className="mt-6 inline-block rounded-md bg-white/15 px-5 py-2.5 font-semibold hover:bg-white/25"
-        >
-          Sign in
-        </Link>
+        <div className="mt-6 flex flex-col gap-3">
+          <Link
+            href="/api/auth/signin?callbackUrl=/tasks"
+            className="mt-6 inline-block rounded-md bg-white/15 px-5 py-2.5 font-semibold hover:bg-white/25"
+          >
+            Sign in
+          </Link>
+          <Link
+            href="/auth/sign-up"
+            className="mt-2 inline-block rounded-md bg-white/15 px-5 py-2.5 font-semibold hover:bg-white/25"
+          >
+            Sign up
+          </Link>
+        </div>
       </div>
     </main>
   );

@@ -1,8 +1,11 @@
-import type { User } from "@auth/core/types";
 import React, { useState } from "react";
-import { api } from "~/trpc/react";
+import { api, type RouterOutputs } from "~/trpc/react";
+import Dropdown from "./Dropdown";
+import Input from "./Input";
+import Button from "./Button";
+import Loader from "./Loader";
 interface IProps {
-  users: Array<User>;
+  users: RouterOutputs["task"]["getAssignableUsers"];
 }
 const CreateTask = ({ users }: IProps) => {
   const utils = api.useUtils();
@@ -29,38 +32,38 @@ const CreateTask = ({ users }: IProps) => {
         });
       }}
     >
-      <input
+      <Input
         value={title}
         onChange={(event) => setTitle(event.target.value)}
         placeholder="Task title"
-        className="rounded-md bg-white/20 px-3 py-2 md:col-span-2"
+        className="md:col-span-2"
         required
       />
-      <input
+      <Input
         value={description}
         onChange={(event) => setDescription(event.target.value)}
         placeholder="Description (optional)"
-        className="rounded-md bg-white/20 px-3 py-2"
       />
-      <select
+      <Dropdown
         value={assignedToId}
-        onChange={(event) => setAssignedToId(event.target.value)}
+        onChange={setAssignedToId}
         className="rounded-md bg-white/20 px-3 py-2"
-      >
-        <option value="">Unassigned</option>
-        {users.map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.name ?? user.email ?? "Unknown user"}
-          </option>
-        ))}
-      </select>
-      <button
+        options={[
+          { value: "", label: "Unassigned" },
+          ...users.map((user) => ({
+            value: user.id,
+            label: user.name ?? user.email ?? "Unknown user",
+            image: user.image ?? "/people.png",
+          })),
+        ]}
+      />
+      <Button
         type="submit"
-        className="rounded-md bg-white/20 px-4 py-2 font-semibold hover:bg-white/30 md:col-span-4"
+        className="md:col-span-4"
         disabled={createTask.isPending}
       >
-        {createTask.isPending ? "Creating..." : "Create Task"}
-      </button>
+        {createTask.isPending ? <Loader /> : "Create Task"}
+      </Button>
     </form>
   );
 };
