@@ -176,11 +176,11 @@ const TasksDashboard = () => {
   );
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-10 text-white">
-      <h1 className="text-3xl font-bold">Tasks</h1>
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-3 py-6 text-white sm:px-4 sm:py-8">
+      <h1 className="text-2xl font-bold sm:text-3xl">Tasks</h1>
       <CreateTask users={users} />
       <DragDropProvider onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="flex w-full gap-4">
+        <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
           {statuses.map((status) => (
             <Column
               key={status}

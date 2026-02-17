@@ -1,4 +1,4 @@
-type TaskChangedAction = "create" | "assign" | "status";
+type TaskChangedAction = "create" | "assign" | "status" | "details" | "delete";
 
 interface PublishTaskChangedInput {
   action: TaskChangedAction;

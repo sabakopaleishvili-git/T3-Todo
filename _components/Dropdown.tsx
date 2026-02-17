@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 type DropdownOption = {
   label: string;
@@ -99,10 +100,12 @@ const Dropdown = ({
                   >
                     <div className="flex items-center gap-2">
                       {option.image ? (
-                        <img
+                        <Image
                           src={option.image}
                           alt={option.label}
-                          className="h-4 w-4 rounded-full"
+                          width={16}
+                          height={16}
+                          className="rounded-full"
                         />
                       ) : null}
                       <span className="text-sm">{option.label}</span>

@@ -22,7 +22,7 @@ const CreateTask = ({ users }: IProps) => {
   });
   return (
     <form
-      className="grid gap-3 rounded-xl bg-white/10 p-4 md:grid-cols-4"
+      className="grid gap-3 rounded-xl bg-white/10 p-3 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
       onSubmit={(event) => {
         event.preventDefault();
         createTask.mutate({
@@ -36,7 +36,7 @@ const CreateTask = ({ users }: IProps) => {
         value={title}
         onChange={(event) => setTitle(event.target.value)}
         placeholder="Task title"
-        className="md:col-span-2"
+        className="sm:col-span-2 lg:col-span-2"
         required
       />
       <Input
@@ -59,7 +59,7 @@ const CreateTask = ({ users }: IProps) => {
       />
       <Button
         type="submit"
-        className="md:col-span-4"
+        className="sm:col-span-2 lg:col-span-4"
         disabled={createTask.isPending}
       >
         {createTask.isPending ? <Loader /> : "Create Task"}

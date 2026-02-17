@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     await db.user.create({
       data: {
         email,
-        name: parsed.data.name?.trim() || null,
+        name: parsed.data.name?.trim() ?? null,
         passwordHash,
       },
     });

@@ -66,6 +66,52 @@ export const taskRouter = createTRPCRouter({
       return createdTask;
     }),
 
+  updateDetails: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.number().int().positive(),
+        title: z.string().min(1).max(120),
+        description: z.string().max(500).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const updatedTask = await ctx.db.task.update({
+        where: { id: input.taskId },
+        data: {
+          title: input.title.trim(),
+          description: input.description?.trim() ? input.description : null,
+        },
+      });
+
+      publishTaskChanged({
+        action: "details",
+        taskId: updatedTask.id,
+        updatedAt: updatedTask.updatedAt,
+      });
+
+      return updatedTask;
+    }),
+
+  delete: protectedProcedure
+    .input(
+      z.object({
+        taskId: z.number().int().positive(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const deletedTask = await ctx.db.task.delete({
+        where: { id: input.taskId },
+      });
+
+      publishTaskChanged({
+        action: "delete",
+        taskId: deletedTask.id,
+        updatedAt: deletedTask.updatedAt,
+      });
+
+      return deletedTask;
+    }),
+
   assign: protectedProcedure
     .input(
       z.object({
