@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import { publishTaskChanged } from "~/server/realtime/publish";
 
 const taskStatusSchema = z.enum(["CREATED", "IN_PROGRESS", "FINISHED"]);
 
@@ -47,7 +48,7 @@ export const taskRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.task.create({
+      const createdTask = await ctx.db.task.create({
         data: {
           title: input.title,
           description: input.description?.trim() ? input.description : null,
@@ -55,6 +56,14 @@ export const taskRouter = createTRPCRouter({
           assignedToId: input.assignedToId ?? null,
         },
       });
+
+      publishTaskChanged({
+        action: "create",
+        taskId: createdTask.id,
+        updatedAt: createdTask.updatedAt,
+      });
+
+      return createdTask;
     }),
 
   assign: protectedProcedure
@@ -65,12 +74,20 @@ export const taskRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.task.update({
+      const updatedTask = await ctx.db.task.update({
         where: { id: input.taskId },
         data: {
           assignedToId: input.assignedToId,
         },
       });
+
+      publishTaskChanged({
+        action: "assign",
+        taskId: updatedTask.id,
+        updatedAt: updatedTask.updatedAt,
+      });
+
+      return updatedTask;
     }),
 
   updateStatus: protectedProcedure
@@ -81,12 +98,20 @@ export const taskRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.task.update({
+      const updatedTask = await ctx.db.task.update({
         where: { id: input.taskId },
         data: {
           status: input.status,
           finishedAt: input.status === "FINISHED" ? new Date() : null,
         },
       });
+
+      publishTaskChanged({
+        action: "status",
+        taskId: updatedTask.id,
+        updatedAt: updatedTask.updatedAt,
+      });
+
+      return updatedTask;
     }),
 });

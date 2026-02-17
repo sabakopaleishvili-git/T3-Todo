@@ -30,6 +30,52 @@ const TasksDashboard = () => {
     setOptimisticTasks(tasks);
   }, [tasks]);
 
+  useEffect(() => {
+    let activeSocket: WebSocket | null = null;
+    let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+    let isUnmounted = false;
+
+    const connect = () => {
+      const fallbackSocketUrl = `${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.hostname}:3001/ws`;
+      const realtimeUrl =
+        process.env.NEXT_PUBLIC_REALTIME_URL ?? fallbackSocketUrl;
+
+      activeSocket = new WebSocket(realtimeUrl);
+
+      activeSocket.onmessage = (event) => {
+        try {
+          const payload = JSON.parse(event.data as string) as { type?: string };
+
+          if (payload.type === "task.changed") {
+            void utils.task.invalidate();
+          }
+        } catch {
+          // Ignore malformed websocket messages.
+        }
+      };
+
+      activeSocket.onerror = () => {
+        activeSocket?.close();
+      };
+
+      activeSocket.onclose = () => {
+        if (!isUnmounted) {
+          reconnectTimer = setTimeout(connect, 1500);
+        }
+      };
+    };
+
+    connect();
+
+    return () => {
+      isUnmounted = true;
+      if (reconnectTimer) {
+        clearTimeout(reconnectTimer);
+      }
+      activeSocket?.close();
+    };
+  }, [utils.task]);
+
   const handleDragStart = (
     event: Parameters<
       NonNullable<React.ComponentProps<typeof DragDropProvider>["onDragStart"]>

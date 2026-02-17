@@ -17,6 +17,8 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
+    "realtime:dev": "node --env-file=.env src/server/realtime/server.mjs",
+    "realtime:start": "node --env-file=.env src/server/realtime/server.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },
@@ -35,6 +37,7 @@
     "react-dom": "^19.0.0",
     "server-only": "^0.0.1",
     "superjson": "^2.2.1",
+    "ws": "^8.19.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
@@ -43,6 +46,7 @@
     "@types/node": "^20.14.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/ws": "^8.18.1",
     "eslint": "^9.23.0",
     "eslint-config-next": "^15.2.3",
     "postcss": "^8.5.3",

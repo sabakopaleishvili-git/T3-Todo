@@ -27,3 +27,30 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## Realtime Sidecar (Self-hosted WebSocket)
+
+This project includes a websocket sidecar for cross-user task updates.
+
+### Environment Variables
+
+Add these values to your local `.env`:
+
+- `REALTIME_URL="http://127.0.0.1:3001"` (used by Next.js server to publish events)
+- `REALTIME_PORT="3001"` (port used by sidecar process)
+- `REALTIME_INTERNAL_SECRET="<long-random-secret>"` (protects the sidecar `/emit` endpoint)
+- `NEXT_PUBLIC_REALTIME_URL="ws://127.0.0.1:3001/ws"` (used by browser websocket client)
+
+### Local Development
+
+Run Next.js and the realtime sidecar in separate terminals:
+
+1. `yarn dev`
+2. `yarn realtime:dev`
+
+### Production
+
+Run Next.js and realtime sidecar as two processes:
+
+1. `yarn start`
+2. `yarn realtime:start`
