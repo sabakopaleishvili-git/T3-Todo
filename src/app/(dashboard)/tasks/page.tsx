@@ -7,9 +7,9 @@ export default async function TasksPage() {
 
   return (
     <HydrateClient>
-      <main>
+      <div>
         <TasksDashboard />
-      </main>
+      </div>
     </HydrateClient>
   );
 }

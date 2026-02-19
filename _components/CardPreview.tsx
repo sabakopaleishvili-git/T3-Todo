@@ -12,16 +12,16 @@ interface IProps {
 
 const CardPreview = ({ task, users }: IProps) => {
   return (
-    <article className="w-[280px] rounded-lg bg-white/10 p-3 shadow-lg">
+    <article className="w-[280px] rounded-lg border border-slate-700 bg-slate-800/90 p-3 shadow-lg">
       <div className="select-none">
-        <p className="font-semibold">{task.title}</p>
+        <p className="font-semibold text-slate-100">{task.title}</p>
       </div>
 
       {task.description ? (
-        <p className="mt-1 text-sm text-white/80">{task.description}</p>
+        <p className="mt-1 text-sm text-slate-300">{task.description}</p>
       ) : null}
 
-      <p className="mt-2 text-xs text-white/70">
+      <p className="mt-2 text-xs text-slate-400">
         Assigned to:{" "}
         {task.assignedTo?.name ?? task.assignedTo?.email ?? "Nobody"}
       </p>
@@ -29,7 +29,7 @@ const CardPreview = ({ task, users }: IProps) => {
       <div className="mt-3 flex flex-col gap-2">
         <Dropdown
           value={task.assignedToId ?? ""}
-          className="pointer-events-none rounded-md bg-white/20 px-2 py-1 text-sm"
+          className="pointer-events-none rounded-md px-2 py-1 text-sm"
           disabled
           options={[
             { value: "", label: "Unassigned" },
@@ -42,7 +42,7 @@ const CardPreview = ({ task, users }: IProps) => {
 
         <Dropdown
           value={task.status}
-          className="pointer-events-none rounded-md bg-white/20 px-2 py-1 text-sm"
+          className="pointer-events-none rounded-md px-2 py-1 text-sm"
           disabled
           options={STATUSES.map((statusValue) => ({
             value: statusValue,

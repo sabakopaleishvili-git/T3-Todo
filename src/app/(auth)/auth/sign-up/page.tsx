@@ -55,14 +55,14 @@ const SignUpPage = () => {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] px-4 text-white">
-      <div className="w-full max-w-md rounded-xl bg-white/10 p-6 text-center">
-        <h1 className="text-2xl font-bold">Sign Up</h1>
-        <p className="mt-2 text-white/80">
+    <main className="flex min-h-screen items-center justify-center px-4 text-slate-100">
+      <div className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900/75 p-7 text-center shadow-2xl backdrop-blur">
+        <h1 className="text-3xl font-bold tracking-tight">Create account</h1>
+        <p className="mt-2 text-slate-400">
           Create an account to create tasks, assign them, and track progress.
         </p>
         {error ? (
-          <p className="mt-4 rounded-md border border-red-300/30 bg-red-500/20 px-3 py-2 text-sm text-red-100">
+          <p className="mt-4 rounded-md border border-red-400/35 bg-red-500/15 px-3 py-2 text-sm text-red-100">
             {error}
           </p>
         ) : null}
@@ -101,8 +101,11 @@ const SignUpPage = () => {
             {isPending ? "Creating account..." : "Sign Up"}
           </Button>
         </form>
-        <p className="mt-2 text-white/80">
-          Already have an account? <Link href="/auth">Sign In</Link>
+        <p className="mt-3 text-slate-400">
+          Already have an account?{" "}
+          <Link href="/auth" className="font-medium text-blue-300 hover:text-blue-200">
+            Sign In
+          </Link>
         </p>
       </div>
     </main>

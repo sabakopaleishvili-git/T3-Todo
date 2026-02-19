@@ -176,8 +176,13 @@ const TasksDashboard = () => {
   );
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-3 py-6 text-white sm:px-4 sm:py-8">
-      <h1 className="text-2xl font-bold sm:text-3xl">Tasks</h1>
+    <div className="flex w-full flex-col gap-6 text-slate-100">
+      <div className="flex flex-col gap-1">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Tasks Board</h1>
+        <p className="text-sm text-slate-400">
+          Plan, assign, and ship work with a clearer workflow.
+        </p>
+      </div>
       <CreateTask users={users} />
       <DragDropProvider onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">

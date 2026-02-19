@@ -66,18 +66,18 @@ const Dropdown = ({
         aria-expanded={isOpen}
         onClick={() => !disabled && setIsOpen((open) => !open)}
         disabled={disabled}
-        className={`w-full rounded-md border border-white/20 bg-white/20 px-3 py-2 text-left text-sm text-white transition outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 disabled:cursor-not-allowed disabled:opacity-60 ${className ?? ""}`}
+        className={`w-full rounded-md border border-slate-600 bg-slate-800/80 px-3 py-2 text-left text-sm text-slate-100 transition outline-none focus:border-blue-400/70 focus:ring-2 focus:ring-blue-500/30 disabled:cursor-not-allowed disabled:opacity-60 ${className ?? ""}`}
       >
         <span className="block truncate pr-8">
           {selectedOption?.label ?? ""}
         </span>
-        <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-white/80">
+        <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-slate-400">
           {isOpen ? "▲" : "▼"}
         </span>
       </button>
 
       {isOpen && !disabled ? (
-        <div className="absolute z-50 mt-2 max-h-56 w-full overflow-auto rounded-md border border-white/20 bg-[#2b2348] p-1 shadow-xl backdrop-blur">
+        <div className="absolute z-50 mt-2 max-h-56 w-full overflow-auto rounded-md border border-slate-600 bg-slate-900 p-1 shadow-xl backdrop-blur">
           <ul role="listbox">
             {options.map((option) => {
               const isSelected = option.value === value;
@@ -95,7 +95,7 @@ const Dropdown = ({
                     className={`flex w-full items-center justify-between rounded px-2 py-1.5 text-left text-sm transition ${
                       isSelected
                         ? "bg-blue-600 text-white"
-                        : "text-white/90 hover:bg-white/10"
+                        : "text-slate-200 hover:bg-slate-800"
                     }`}
                   >
                     <div className="flex items-center gap-2">

@@ -83,9 +83,12 @@ const Card = ({
   });
 
   return (
-    <article ref={ref} className="w-full rounded-lg bg-white/10 p-3 sm:p-4">
+    <article
+      ref={ref}
+      className="w-full rounded-lg border border-slate-700 bg-slate-800/80 p-3 shadow-md sm:p-4"
+    >
       <div className="flex cursor-grab flex-wrap items-start justify-between gap-2 select-none active:cursor-grabbing">
-        <p className="max-w-full font-semibold wrap-break-word sm:max-w-[70%]">
+        <p className="max-w-full font-semibold text-slate-100 wrap-break-word sm:max-w-[70%]">
           {task.title}
         </p>
         <div className="flex items-center gap-2 self-start">
@@ -104,9 +107,9 @@ const Card = ({
         </div>
       </div>
       {task.description ? (
-        <p className="mt-1 text-sm text-white/80">{task.description}</p>
+        <p className="mt-1 text-sm text-slate-300">{task.description}</p>
       ) : null}
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-white/70">
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
         Assigned to:{" "}
         <div className="flex items-center gap-2">
           {task.assignedTo?.image ? (
@@ -121,7 +124,7 @@ const Card = ({
             />
           ) : (
             <Image
-              className="rounded-full bg-white/20 p-1"
+              className="rounded-full bg-slate-700 p-1"
               src={"/people.png"}
               width={24}
               height={24}
@@ -132,17 +135,17 @@ const Card = ({
               }
             />
           )}
-          <span className="text-sm">
+          <span className="text-sm text-slate-300">
             {task.assignedTo?.name ?? task.assignedTo?.email ?? "Nobody"}
           </span>
         </div>
       </div>
       {countdownTime && (
-        <div className="mt-3 flex items-center justify-between gap-2 rounded-md border border-red-400/30 bg-red-500/15 px-2 py-1">
-          <span className="text-xs font-medium tracking-wide text-red-100/90 uppercase">
+        <div className="mt-3 flex items-center justify-between gap-2 rounded-md border border-amber-400/35 bg-amber-500/10 px-2 py-1">
+          <span className="text-xs font-medium tracking-wide text-amber-100 uppercase">
             Auto delete in
           </span>
-          <span className="rounded bg-red-500/25 px-2 py-1 font-mono text-sm font-semibold text-red-200">
+          <span className="rounded bg-amber-500/20 px-2 py-1 font-mono text-sm font-semibold text-amber-100">
             {countdownTime}
           </span>
         </div>
@@ -154,7 +157,7 @@ const Card = ({
           onChange={(value) => {
             onAssignTask(task.id, value || null);
           }}
-          className="rounded-md bg-white/20 px-2 py-1 text-sm"
+          className="rounded-md px-2 py-1 text-sm"
           disabled={isAssignPending}
           options={[
             { value: "", label: "Unassigned" },
@@ -171,7 +174,7 @@ const Card = ({
           onChange={(value) => {
             onUpdateStatus(task.id, value as Status);
           }}
-          className="rounded-md bg-white/20 px-2 py-1 text-sm"
+          className="rounded-md px-2 py-1 text-sm"
           disabled={isStatusPending}
           options={STATUSES.map((statusValue) => ({
             value: statusValue,

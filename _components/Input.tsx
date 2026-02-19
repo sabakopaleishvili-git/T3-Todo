@@ -8,7 +8,7 @@ const Input = ({ className, ...props }: InputProps) => {
   return (
     <input
       {...props}
-      className={`w-full rounded-md border border-white/20 bg-white/20 px-3 py-2 text-sm text-white transition outline-none placeholder:text-white/60 focus:border-white/50 focus:ring-2 focus:ring-white/20 disabled:cursor-not-allowed disabled:opacity-60 ${className ?? ""}`}
+      className={`w-full rounded-md border border-slate-600 bg-slate-800/80 px-3 py-2 text-sm text-slate-100 transition outline-none placeholder:text-slate-400 focus:border-blue-400/70 focus:ring-2 focus:ring-blue-500/30 disabled:cursor-not-allowed disabled:opacity-60 ${className ?? ""}`}
     />
   );
 };

@@ -71,12 +71,12 @@ const EditModal = ({
           aria-modal="true"
           aria-label="Edit task modal"
         >
-          <div className="absolute inset-0 bg-black/60" onClick={handleClose} />
+          <div className="absolute inset-0 bg-slate-950/80" onClick={handleClose} />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
-            <div className="pointer-events-auto w-full max-w-md rounded-xl border border-white/20 bg-[#1e1f34] p-5 text-white shadow-xl">
+            <div className="pointer-events-auto w-full max-w-md rounded-xl border border-slate-700 bg-slate-900 p-5 text-slate-100 shadow-xl">
               <h2 className="text-lg font-semibold">Edit Task</h2>
               {error ? (
-                <p className="mt-3 rounded-md border border-red-300/30 bg-red-500/20 px-3 py-2 text-sm text-red-100">
+                <p className="mt-3 rounded-md border border-red-400/35 bg-red-500/15 px-3 py-2 text-sm text-red-100">
                   {error}
                 </p>
               ) : null}
@@ -92,7 +92,7 @@ const EditModal = ({
                 <textarea
                   value={description}
                   onChange={(event) => setDescription(event.target.value)}
-                  className="min-h-24 w-full rounded-md border border-white/20 bg-white/20 px-3 py-2 text-sm text-white outline-none placeholder:text-white/60 focus:border-white/50 focus:ring-2 focus:ring-white/20"
+                  className="min-h-24 w-full rounded-md border border-slate-600 bg-slate-800/80 px-3 py-2 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-blue-400/70 focus:ring-2 focus:ring-blue-500/30"
                   placeholder="Description"
                   maxLength={500}
                 />
@@ -100,7 +100,7 @@ const EditModal = ({
                   <Button
                     type="button"
                     onClick={handleClose}
-                    className="bg-white/10"
+                    className="border-slate-600 bg-slate-800/70 text-slate-200 hover:bg-slate-700/80"
                     disabled={updateDetails.isPending}
                   >
                     Cancel

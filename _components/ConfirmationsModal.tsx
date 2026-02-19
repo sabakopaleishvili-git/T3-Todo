@@ -32,7 +32,7 @@ const ConfirmationsModal = ({
   return (
     <>
       <Button
-        className="border-red-400/40! bg-red-500/25! px-2! py-1! text-sm text-red-100! transition hover:border-red-300/60! hover:bg-red-500/40! hover:text-white!"
+        className="border-red-400/45! bg-red-600/80! px-2! py-1! text-sm text-white! transition hover:bg-red-500!"
         onClick={handleOpen}
       >
         Delete
@@ -44,11 +44,11 @@ const ConfirmationsModal = ({
           aria-modal="true"
           aria-label="Confirmations modal"
         >
-          <div className="absolute inset-0 bg-black/60" onClick={handleClose} />
+          <div className="absolute inset-0 bg-slate-950/80" onClick={handleClose} />
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4">
-            <div className="pointer-events-auto w-full max-w-md rounded-xl border border-white/20 bg-[#1e1f34] p-5 text-white shadow-xl">
-              <h2 className="text-lg font-semibold">Confirmations</h2>
-              <p className="text-sm text-white/60">
+            <div className="pointer-events-auto w-full max-w-md rounded-xl border border-slate-700 bg-slate-900 p-5 text-slate-100 shadow-xl">
+              <h2 className="text-lg font-semibold">Delete task</h2>
+              <p className="text-sm text-slate-400">
                 Are you sure you want to delete this task?
               </p>
 
@@ -56,13 +56,13 @@ const ConfirmationsModal = ({
                 <Button
                   type="button"
                   onClick={handleClose}
-                  className="bg-white/10"
+                  className="border-slate-600 bg-slate-800/70 text-slate-200 hover:bg-slate-700/80"
                   disabled={deleteTask.isPending}
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="border-red-400/40! bg-red-500/25! text-red-100! transition hover:border-red-300/60! hover:bg-red-500/40! hover:text-white!"
+                  className="border-red-400/45! bg-red-600/80! text-white! transition hover:bg-red-500!"
                   type="button"
                   onClick={handleDelete}
                   disabled={deleteTask.isPending}

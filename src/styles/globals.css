@@ -6,6 +6,24 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+:root {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(30, 64, 175, 0.28), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(15, 118, 110, 0.2), transparent 55%),
+    #0b1220;
+  color: #e2e8f0;
+}
+
+*::selection {
+  background: rgba(59, 130, 246, 0.35);
+  color: #f8fafc;
+}
+
 @keyframes skeleton-wave {
   0% {
     background-position: 200% 0;

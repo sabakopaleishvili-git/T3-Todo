@@ -22,7 +22,7 @@ const CreateTask = ({ users }: IProps) => {
   });
   return (
     <form
-      className="grid gap-3 rounded-xl bg-white/10 p-3 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
+      className="grid gap-3 rounded-xl border border-slate-700 bg-slate-900/70 p-3 shadow-xl sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
       onSubmit={(event) => {
         event.preventDefault();
         createTask.mutate({
@@ -47,7 +47,7 @@ const CreateTask = ({ users }: IProps) => {
       <Dropdown
         value={assignedToId}
         onChange={setAssignedToId}
-        className="rounded-md bg-white/20 px-3 py-2"
+        className="rounded-md px-3 py-2"
         options={[
           { value: "", label: "Unassigned" },
           ...users.map((user) => ({
