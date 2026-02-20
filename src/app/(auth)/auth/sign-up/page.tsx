@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import Button from "_components/Button";
 import Input from "_components/Input";
+import ThemeToggle from "_components/ThemeToggle";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -55,10 +56,13 @@ const SignUpPage = () => {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4 text-slate-100">
-      <div className="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900/75 p-7 text-center shadow-2xl backdrop-blur">
+    <main className="flex min-h-screen items-center justify-center px-4 text-slate-900 dark:text-slate-100">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white/90 p-7 text-center shadow-2xl backdrop-blur dark:border-slate-700 dark:bg-slate-900/75">
         <h1 className="text-3xl font-bold tracking-tight">Create account</h1>
-        <p className="mt-2 text-slate-400">
+        <p className="mt-2 text-slate-500 dark:text-slate-400">
           Create an account to create tasks, assign them, and track progress.
         </p>
         {error ? (
@@ -101,9 +105,12 @@ const SignUpPage = () => {
             {isPending ? "Creating account..." : "Sign Up"}
           </Button>
         </form>
-        <p className="mt-3 text-slate-400">
+        <p className="mt-3 text-slate-500 dark:text-slate-400">
           Already have an account?{" "}
-          <Link href="/auth" className="font-medium text-blue-300 hover:text-blue-200">
+          <Link
+            href="/auth"
+            className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-300 dark:hover:text-blue-200"
+          >
             Sign In
           </Link>
         </p>

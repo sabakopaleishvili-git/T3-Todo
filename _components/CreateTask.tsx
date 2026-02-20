@@ -22,7 +22,7 @@ const CreateTask = ({ users }: IProps) => {
   });
   return (
     <form
-      className="grid gap-3 rounded-xl border border-slate-700 bg-slate-900/70 p-3 shadow-xl sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
+      className="grid gap-3 rounded-xl border border-slate-200 bg-white/90 p-3 shadow-xl dark:border-slate-700 dark:bg-slate-900/70 sm:grid-cols-2 sm:p-4 lg:grid-cols-4"
       onSubmit={(event) => {
         event.preventDefault();
         createTask.mutate({
@@ -36,13 +36,13 @@ const CreateTask = ({ users }: IProps) => {
         value={title}
         onChange={(event) => setTitle(event.target.value)}
         placeholder="Task title"
-        className="sm:col-span-2 lg:col-span-2"
         required
       />
       <Input
         value={description}
         onChange={(event) => setDescription(event.target.value)}
         placeholder="Description (optional)"
+        className="sm:col-span-2 lg:col-span-2"
       />
       <Dropdown
         value={assignedToId}

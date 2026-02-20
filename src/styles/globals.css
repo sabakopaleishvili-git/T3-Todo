@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans:
@@ -7,21 +8,36 @@
 }
 
 :root {
+  color-scheme: light;
+  --app-bg:
+    radial-gradient(1200px 600px at 15% -10%, rgba(59, 130, 246, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(20, 184, 166, 0.1), transparent 55%),
+    #f8fafc;
+  --app-text: #0f172a;
+  --selection-bg: rgba(59, 130, 246, 0.25);
+  --selection-text: #0f172a;
+}
+
+:root.dark {
   color-scheme: dark;
+  --app-bg:
+    radial-gradient(1200px 600px at 15% -10%, rgba(30, 64, 175, 0.28), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(15, 118, 110, 0.2), transparent 55%),
+    #0b1220;
+  --app-text: #e2e8f0;
+  --selection-bg: rgba(59, 130, 246, 0.35);
+  --selection-text: #f8fafc;
 }
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(1200px 600px at 15% -10%, rgba(30, 64, 175, 0.28), transparent 60%),
-    radial-gradient(900px 500px at 85% 0%, rgba(15, 118, 110, 0.2), transparent 55%),
-    #0b1220;
-  color: #e2e8f0;
+  background: var(--app-bg);
+  color: var(--app-text);
 }
 
 *::selection {
-  background: rgba(59, 130, 246, 0.35);
-  color: #f8fafc;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 @keyframes skeleton-wave {

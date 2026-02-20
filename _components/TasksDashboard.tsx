@@ -6,6 +6,7 @@ import Column from "./Column";
 import CreateTask from "./CreateTask";
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
 import CardPreview from "./CardPreview";
+import Filter from "./Filter";
 
 type TaskStatus = RouterOutputs["task"]["list"][number]["status"];
 
@@ -175,15 +176,26 @@ const TasksDashboard = () => {
     (task) => String(task.id) === activeTaskId,
   );
 
+  const handleFilterTasks = (userId: string) => {
+    if (userId === "all") {
+      setOptimisticTasks(tasks);
+      return;
+    }
+    setOptimisticTasks(tasks.filter((task) => task.assignedToId === userId));
+  };
+
   return (
-    <div className="flex w-full flex-col gap-6 text-slate-100">
+    <div className="flex w-full flex-col gap-6 text-slate-900 dark:text-slate-100">
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Tasks Board</h1>
-        <p className="text-sm text-slate-400">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          Tasks Board
+        </h1>
+        <p className="text-sm text-slate-500 dark:text-slate-400">
           Plan, assign, and ship work with a clearer workflow.
         </p>
       </div>
       <CreateTask users={users} />
+      <Filter handleFilterTasks={handleFilterTasks} users={users} />
       <DragDropProvider onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
         <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
           {statuses.map((status) => (

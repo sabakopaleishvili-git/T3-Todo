@@ -12,16 +12,20 @@ interface IProps {
 
 const CardPreview = ({ task, users }: IProps) => {
   return (
-    <article className="w-[280px] rounded-lg border border-slate-700 bg-slate-800/90 p-3 shadow-lg">
+    <article className="w-[280px] rounded-lg border border-slate-200 bg-slate-50 p-3 shadow-lg dark:border-slate-700 dark:bg-slate-800/90">
       <div className="select-none">
-        <p className="font-semibold text-slate-100">{task.title}</p>
+        <p className="font-semibold text-slate-900 dark:text-slate-100">
+          {task.title}
+        </p>
       </div>
 
       {task.description ? (
-        <p className="mt-1 text-sm text-slate-300">{task.description}</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          {task.description}
+        </p>
       ) : null}
 
-      <p className="mt-2 text-xs text-slate-400">
+      <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
         Assigned to:{" "}
         {task.assignedTo?.name ?? task.assignedTo?.email ?? "Nobody"}
       </p>

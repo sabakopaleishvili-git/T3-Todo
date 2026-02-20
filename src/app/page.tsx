@@ -1,8 +1,12 @@
 import { redirect } from "next/navigation";
+import { auth } from "~/server/auth";
 
-const page = () => {
+const page = async () => {
+  const session = await auth();
+  if (session?.user) {
+    redirect("/tasks");
+  }
   redirect("/auth");
-  return <div>page</div>;
 };
 
 export default page;

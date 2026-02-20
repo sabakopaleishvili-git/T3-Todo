@@ -85,10 +85,10 @@ const Card = ({
   return (
     <article
       ref={ref}
-      className="w-full rounded-lg border border-slate-700 bg-slate-800/80 p-3 shadow-md sm:p-4"
+      className="w-full rounded-lg border border-slate-200 bg-slate-50 p-3 shadow-md dark:border-slate-700 dark:bg-slate-800/80 sm:p-4"
     >
       <div className="flex cursor-grab flex-wrap items-start justify-between gap-2 select-none active:cursor-grabbing">
-        <p className="max-w-full font-semibold text-slate-100 wrap-break-word sm:max-w-[70%]">
+        <p className="max-w-full font-semibold text-slate-900 wrap-break-word dark:text-slate-100 sm:max-w-[70%]">
           {task.title}
         </p>
         <div className="flex items-center gap-2 self-start">
@@ -107,9 +107,11 @@ const Card = ({
         </div>
       </div>
       {task.description ? (
-        <p className="mt-1 text-sm text-slate-300">{task.description}</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+          {task.description}
+        </p>
       ) : null}
-      <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-400">
+      <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
         Assigned to:{" "}
         <div className="flex items-center gap-2">
           {task.assignedTo?.image ? (
@@ -124,7 +126,7 @@ const Card = ({
             />
           ) : (
             <Image
-              className="rounded-full bg-slate-700 p-1"
+              className="rounded-full bg-slate-200 p-1 dark:bg-slate-700"
               src={"/people.png"}
               width={24}
               height={24}
@@ -135,17 +137,17 @@ const Card = ({
               }
             />
           )}
-          <span className="text-sm text-slate-300">
+          <span className="text-sm text-slate-700 dark:text-slate-300">
             {task.assignedTo?.name ?? task.assignedTo?.email ?? "Nobody"}
           </span>
         </div>
       </div>
       {countdownTime && (
         <div className="mt-3 flex items-center justify-between gap-2 rounded-md border border-amber-400/35 bg-amber-500/10 px-2 py-1">
-          <span className="text-xs font-medium tracking-wide text-amber-100 uppercase">
+          <span className="text-xs font-medium tracking-wide text-amber-700 uppercase dark:text-amber-100">
             Auto delete in
           </span>
-          <span className="rounded bg-amber-500/20 px-2 py-1 font-mono text-sm font-semibold text-amber-100">
+          <span className="rounded bg-amber-500/20 px-2 py-1 font-mono text-sm font-semibold text-amber-700 dark:text-amber-100">
             {countdownTime}
           </span>
         </div>

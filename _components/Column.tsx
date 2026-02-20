@@ -34,15 +34,15 @@ const Column = ({
   return (
     <div
       ref={ref}
-      className="h-max min-h-[180px] w-full rounded-xl border border-slate-700 bg-slate-900/70 p-3 shadow-xl sm:min-h-[200px] sm:p-4"
+      className="h-max min-h-[180px] w-full rounded-xl border border-slate-200 bg-white/90 p-3 shadow-xl dark:border-slate-700 dark:bg-slate-900/70 sm:min-h-[200px] sm:p-4"
     >
-      <h2 className="mb-3 text-lg font-semibold tracking-wide text-slate-200 sm:text-xl">
+      <h2 className="mb-3 text-lg font-semibold tracking-wide text-slate-800 dark:text-slate-200 sm:text-xl">
         {status.replace("_", " ")}
       </h2>
 
       <div className="flex w-full flex-col gap-3">
         {generateTasks(status as TaskStatus).length === 0 ? (
-          <p className="rounded-md border border-dashed border-slate-700 px-3 py-4 text-center text-sm text-slate-400">
+          <p className="rounded-md border border-dashed border-slate-300 px-3 py-4 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
             No tasks yet
           </p>
         ) : (
