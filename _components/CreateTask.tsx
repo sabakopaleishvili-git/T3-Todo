@@ -6,8 +6,9 @@ import Button from "./Button";
 import Loader from "./Loader";
 interface IProps {
   users: RouterOutputs["task"]["getAssignableUsers"];
+  projectId: number;
 }
-const CreateTask = ({ users }: IProps) => {
+const CreateTask = ({ users, projectId }: IProps) => {
   const utils = api.useUtils();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -26,6 +27,7 @@ const CreateTask = ({ users }: IProps) => {
       onSubmit={(event) => {
         event.preventDefault();
         createTask.mutate({
+          projectId,
           title,
           description: description || undefined,
           assignedToId: assignedToId || undefined,

@@ -10,6 +10,7 @@ interface IProps {
   status: TaskStatus;
   tasks: RouterOutputs["task"]["list"];
   users: RouterOutputs["task"]["getAssignableUsers"];
+  projectId: number | null;
   onAssignTask: (taskId: number, assignedToId: string | null) => void;
   onUpdateStatus: (taskId: number, status: Status) => void;
   pendingAssignTaskId: number | null;
@@ -19,6 +20,7 @@ const Column = ({
   status,
   tasks,
   users,
+  projectId,
   onAssignTask,
   onUpdateStatus,
   pendingAssignTaskId,
@@ -51,6 +53,7 @@ const Column = ({
               key={item.id}
               task={item}
               users={users}
+              projectId={projectId}
               onAssignTask={onAssignTask}
               onUpdateStatus={onUpdateStatus}
               isAssignPending={pendingAssignTaskId === item.id}

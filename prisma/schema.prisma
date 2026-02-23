@@ -33,6 +33,17 @@ enum TaskStatus {
     FINISHED
 }
 
+enum ProjectRole {
+    OWNER
+    MEMBER
+}
+
+enum ProjectInvitationStatus {
+    PENDING
+    ACCEPTED
+    DECLINED
+}
+
 model Task {
     id          Int         @id @default(autoincrement())
     title       String
@@ -46,9 +57,54 @@ model Task {
     createdById String
     assignedTo  User?       @relation("AssignedTasks", fields: [assignedToId], references: [id])
     assignedToId String?
+    project     Project?    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    projectId   Int?
 
-    @@index([status, finishedAt])
+    @@index([projectId, status, finishedAt])
     @@index([assignedToId])
+}
+
+model Project {
+    id          Int                 @id @default(autoincrement())
+    title       String
+    description String?
+    createdAt   DateTime            @default(now())
+    updatedAt   DateTime            @updatedAt
+    owner       User                @relation("OwnedProjects", fields: [ownerId], references: [id], onDelete: Cascade)
+    ownerId     String
+    members     ProjectMember[]
+    invitations ProjectInvitation[]
+    tasks       Task[]
+}
+
+model ProjectMember {
+    id        Int         @id @default(autoincrement())
+    project   Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    projectId Int
+    user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId    String
+    role      ProjectRole @default(MEMBER)
+    joinedAt  DateTime    @default(now())
+
+    @@unique([projectId, userId])
+    @@index([userId])
+}
+
+model ProjectInvitation {
+    id            Int                     @id @default(autoincrement())
+    project       Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    projectId     Int
+    invitedBy     User                    @relation("SentProjectInvitations", fields: [invitedById], references: [id], onDelete: Cascade)
+    invitedById   String
+    invitedUser   User                    @relation("ReceivedProjectInvitations", fields: [invitedUserId], references: [id], onDelete: Cascade)
+    invitedUserId String
+    status        ProjectInvitationStatus @default(PENDING)
+    createdAt     DateTime                @default(now())
+    updatedAt     DateTime                @updatedAt
+    respondedAt   DateTime?
+
+    @@unique([projectId, invitedUserId])
+    @@index([invitedUserId, status])
 }
 
 // Necessary for Next auth
@@ -91,6 +147,10 @@ model User {
     posts         Post[]
     createdTasks  Task[]    @relation("CreatedTasks")
     assignedTasks Task[]    @relation("AssignedTasks")
+    ownedProjects Project[] @relation("OwnedProjects")
+    projectMemberships ProjectMember[]
+    sentProjectInvitations ProjectInvitation[] @relation("SentProjectInvitations")
+    receivedProjectInvitations ProjectInvitation[] @relation("ReceivedProjectInvitations")
 }
 
 model VerificationToken {

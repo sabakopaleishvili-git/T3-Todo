@@ -9,6 +9,7 @@ interface IProps {
   handleOpen: () => void;
   handleClose: () => void;
   task: RouterOutputs["task"]["list"][number];
+  projectId: number | null;
 }
 
 const ConfirmationsModal = ({
@@ -16,6 +17,7 @@ const ConfirmationsModal = ({
   handleOpen,
   handleClose,
   task,
+  projectId,
 }: IProps) => {
   const utils = api.useUtils();
   const deleteTask = api.task.delete.useMutation({
@@ -26,7 +28,11 @@ const ConfirmationsModal = ({
   });
 
   const handleDelete = () => {
-    deleteTask.mutate({ taskId: task.id });
+    if (!projectId) {
+      return;
+    }
+
+    deleteTask.mutate({ projectId, taskId: task.id });
   };
 
   return (

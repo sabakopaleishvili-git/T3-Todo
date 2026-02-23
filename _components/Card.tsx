@@ -14,6 +14,7 @@ const TEN_MINUTES_IN_MS = 10 * 60 * 1000;
 interface IProps {
   task: RouterOutputs["task"]["list"][number];
   users: RouterOutputs["task"]["getAssignableUsers"];
+  projectId: number | null;
   onAssignTask: (taskId: number, assignedToId: string | null) => void;
   onUpdateStatus: (taskId: number, status: Status) => void;
   isAssignPending: boolean;
@@ -22,6 +23,7 @@ interface IProps {
 const Card = ({
   task,
   users,
+  projectId,
   onAssignTask,
   onUpdateStatus,
   isAssignPending,
@@ -97,12 +99,14 @@ const Card = ({
             handleOpen={handleOpenDeleteModal}
             handleClose={handleCloseDeleteModal}
             task={task}
+            projectId={projectId}
           />
           <EditModal
             isOpen={isEditModalOpen}
             handleOpen={handleOpenEditModal}
             handleClose={handleCloseEditModal}
             task={task}
+            projectId={projectId}
           />
         </div>
       </div>

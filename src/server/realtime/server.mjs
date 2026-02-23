@@ -9,7 +9,8 @@ const REALTIME_PORT = Number(process.env.REALTIME_PORT ?? 3001);
 const REALTIME_INTERNAL_SECRET = process.env.REALTIME_INTERNAL_SECRET;
 const AUTH_SECRET = process.env.AUTH_SECRET;
 const HEARTBEAT_INTERVAL_MS = 30000;
-const DEFAULT_ROOM = "tasks:global";
+const GLOBAL_ROOM = "tasks:global";
+const userRoomName = (userId) => `user:${userId}`;
 
 if (!AUTH_SECRET) {
   throw new Error(
@@ -82,7 +83,7 @@ const resolveAuthenticatedUser = async (request) => {
   return null;
 };
 
-const broadcast = (payload, room = DEFAULT_ROOM) => {
+const broadcast = (payload, room = GLOBAL_ROOM) => {
   const message = JSON.stringify(payload);
   let recipients = 0;
 
@@ -148,10 +149,11 @@ const httpServer = createServer(async (request, response) => {
 });
 
 wsServer.on("connection", (socket, request, authUser) => {
+  const userRoom = userRoomName(authUser.id);
   const metadata = {
     userId: authUser.id,
     email: authUser.email,
-    rooms: new Set([DEFAULT_ROOM]),
+    rooms: new Set([GLOBAL_ROOM, userRoom]),
     isAlive: true,
   };
 
@@ -175,7 +177,8 @@ wsServer.on("connection", (socket, request, authUser) => {
       if (
         payload?.type === "unsubscribe" &&
         typeof payload.room === "string" &&
-        payload.room !== DEFAULT_ROOM
+        payload.room !== GLOBAL_ROOM &&
+        payload.room !== userRoom
       ) {
         metadata.rooms.delete(payload.room);
       }

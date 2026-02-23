@@ -26,6 +26,14 @@ export default async function DashboardLayout({
             >
               TaskFlow
             </Link>
+            <nav className="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+              <Link href="/tasks" className="transition hover:text-blue-600">
+                Tasks
+              </Link>
+              <Link href="/projects" className="transition hover:text-blue-600">
+                Projects
+              </Link>
+            </nav>
           </div>
           <div className="flex w-full items-center justify-between gap-4 sm:w-auto sm:justify-normal">
             <ThemeToggle />

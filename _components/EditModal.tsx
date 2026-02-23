@@ -11,6 +11,7 @@ interface EditModalProps {
   handleOpen: () => void;
   handleClose: () => void;
   task: RouterOutputs["task"]["list"][number];
+  projectId: number | null;
 }
 
 const EditModal = ({
@@ -18,6 +19,7 @@ const EditModal = ({
   handleOpen,
   handleClose,
   task,
+  projectId,
 }: EditModalProps) => {
   const utils = api.useUtils();
   const [title, setTitle] = useState(task.title);
@@ -46,6 +48,11 @@ const EditModal = ({
     event.preventDefault();
     setError(null);
 
+    if (!projectId) {
+      setError("Select a project before editing tasks.");
+      return;
+    }
+
     const trimmedTitle = title.trim();
     if (!trimmedTitle) {
       setError("Title is required.");
@@ -53,6 +60,7 @@ const EditModal = ({
     }
 
     updateDetails.mutate({
+      projectId,
       taskId: task.id,
       title: trimmedTitle,
       description: description.trim() ? description : undefined,

@@ -135,7 +135,36 @@ exports.Prisma.TaskScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById',
-  assignedToId: 'assignedToId'
+  assignedToId: 'assignedToId',
+  projectId: 'projectId'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  ownerId: 'ownerId'
+};
+
+exports.Prisma.ProjectMemberScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  userId: 'userId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+};
+
+exports.Prisma.ProjectInvitationScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  invitedById: 'invitedById',
+  invitedUserId: 'invitedUserId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  respondedAt: 'respondedAt'
 };
 
 exports.Prisma.AccountScalarFieldEnum = {
@@ -191,9 +220,23 @@ exports.TaskStatus = exports.$Enums.TaskStatus = {
   FINISHED: 'FINISHED'
 };
 
+exports.ProjectRole = exports.$Enums.ProjectRole = {
+  OWNER: 'OWNER',
+  MEMBER: 'MEMBER'
+};
+
+exports.ProjectInvitationStatus = exports.$Enums.ProjectInvitationStatus = {
+  PENDING: 'PENDING',
+  ACCEPTED: 'ACCEPTED',
+  DECLINED: 'DECLINED'
+};
+
 exports.Prisma.ModelName = {
   Post: 'Post',
   Task: 'Task',
+  Project: 'Project',
+  ProjectMember: 'ProjectMember',
+  ProjectInvitation: 'ProjectInvitation',
   Account: 'Account',
   Session: 'Session',
   User: 'User',
